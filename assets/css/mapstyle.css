@@ -1,0 +1,42 @@
+#map {
+    height: 300px;
+    width: 300px;
+}
+
+#city, #state, #submit {
+    margin: 0;
+    float: left;
+    height: 100%;
+    padding: 0;
+    border: none;
+}
+
+#submit {
+    padding: 5px;
+    width: 88px;
+    background-color: #E5E4DF;
+}
+
+#state:hover, #submit:hover {
+    background-color: #DBD8D5;
+}
+
+#state {
+    width: 40px;
+    background-color: #E5E4DF;
+    text-align: center;
+}
+
+#city {
+    width: 170px;
+
+}
+
+form {
+    padding: 0;
+    margin: 0;
+    width: 298px;
+    height: 30px;
+    border: 1px solid #E5E4DF;
+    border-top: none;
+}

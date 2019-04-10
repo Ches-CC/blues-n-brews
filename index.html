@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Brews and Blues</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
+  <link href="assets/css/mapstyle.css" rel="stylesheet" />
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
+  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+  <script src='https://unpkg.com/es6-promise@4.2.4/dist/es6-promise.auto.min.js'></script>
+  <script src="https://unpkg.com/@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js"></script>
+  <script src="assets/javascript/firebase.js"></script>
+  <script src="assets/javascript/mapboxAPI.js"></script>
+  <script src="assets/javascript/ticketmaster.js"></script>
+  <script src="assets/javascript/breweryAPI.js"></script>
+  <script src="assets/javascript/javascript.js" type="text/javascript"></script>
+  <script src="assets/javascript/mapboxAPI.js"></script>
+
+</head>
+
+<body class="container-fluid headerColor">
+
+  <!--Title for Jumbotron-->
+  <div class="row">
+    <h1 class="col-12 text-center">Brews and Blues</h1>
+  </div>
+
+  <!--Sub-Title for Jumbotron-->
+  <div class="row">
+    <h3 class="col-12 text-center">Your one stop shop for shows and beer!</h3>
+  </div>
+
+  <!--Title for Search-->
+  <div class="row">
+    <p class="col-12 lead text-center">Enter your city to see what events are coming to you!</p>
+  </div>
+
+  <div class="row search-bar">
+    <div class="col-12">
+      <div class="searchBox1">
+        <input type="text" id="query-city" placeholder="Auburn" required>
+        <select id="query-state" required>
+          <option value="AL">AL</option>
+          <option value="AK">AK</option>
+          <option value="AZ">AZ</option>
+          <option value="AR">AR</option>
+          <option value="CA">CA</option>
+          <option value="CO">CO</option>
+          <option value="CT">CT</option>
+          <option value="DE">DE</option>
+          <option value="FL">FL</option>
+          <option value="GA">GA</option>
+          <option value="HI">HI</option>
+          <option value="ID">ID</option>
+          <option value="IL">IL</option>
+          <option value="IN">IN</option>
+          <option value="IA">IA</option>
+          <option value="KS">KS</option>
+          <option value="KY">KY</option>
+          <option value="LA">LA</option>
+          <option value="ME">ME</option>
+          <option value="MD">MD</option>
+          <option value="MA">MA</option>
+          <option value="MI">MI</option>
+          <option value="MN">MN</option>
+          <option value="MS">MS</option>
+          <option value="MO">MO</option>
+          <option value="MT">MT</option>
+          <option value="NE">NE</option>
+          <option value="NV">NV</option>
+          <option value="NH">NH</option>
+          <option value="NJ">NJ</option>
+          <option value="NM">NM</option>
+          <option value="NY">NY</option>
+          <option value="NC">NC</option>
+          <option value="ND">ND</option>
+          <option value="OH">OH</option>
+          <option value="OK">OK</option>
+          <option value="OR">OR</option>
+          <option value="PA">PA</option>
+          <option value="RI">RI</option>
+          <option value="SC">SC</option>
+          <option value="SD">SD</option>
+          <option value="TN">TN</option>
+          <option value="TX">TX</option>
+          <option value="UT">UT</option>
+          <option value="VT">VT</option>
+          <option value="VA">VA</option>
+          <option value="WA">WA</option>
+          <option value="WV">WV</option>
+          <option value="WI">WI</option>
+          <option value="WY">WY</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row search-bar date-search">
+    <div class="col-12 padded">
+      <div class="searchBox2">
+        <span class="dateSearchLabel">Search Between </span><input type="date" id="sdate" required>
+        <span class="dateSearchLabel"> and </span><input type="date" id="edate" required>
+        <!--Submit button for results-->
+        <button id="event-query" type="button">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <!--row to generate artist/concert results-->
+  <div class="row">
+    <div class="col-12" id="results">
+
+    </div>
+  </div>
+
+
+  <!--div/div ID to dynamically insert all the initially-hidden info-->
+  <div class="row" id="details-display">
+    <!--MAP-->
+    <div class="col-4">
+      <div id="map"></div>
+    </div>
+
+    <!--Artist/Event Details-->
+    <div class="col-4">
+      <div></div>
+    </div>
+
+    <!--Brewery List-->
+    <div class="col-4">
+      <div class="input-group">
+        <div class="input-group-text" id="btnGroupAddon">BP</div>
+        <div id="brew-result">
+          <a class="list-group-item list-group-item-action disabled">Brewery Name: Four Peaks</a>
+          <a class="list-group-item list-group-item-action disabled">City: Phoenix</a>
+          <a class="list-group-item list-group-item-action disabled">State: AZ</a>
+          <a href="#" class="list-group-item list-group-item-action active">
+            Website
+          </a>
+
+        </div>
+
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <!--End of Hidden Display Info-->
+
+
+  <!--orig header map/artist/brewery code-->
+  <!-- <div class="row">
+
+    <div class="col-4">
+      <h2 id="artist-chosen">Map</h2>
+    </div>
+
+    <div class="col-4">
+      <a href="#" class="list-group-item list-group-item-action active">Artist</a>
+    </div>
+
+    <div class="col-4">
+      <h2 id="artist-chosen" style="text-align: center">Brewery</h2>
+    </div>
+
+  </row>
+
+ 
+
+  <div class="col-4">
+    <div class="artist-card" style="width: 18rem;">
+
+      <img class="artist-card-img-top" src="assets/images/post_malone.png" alt="Card image cap">
+      <div class="artist-card-body">
+        <div class="list-group">
+          <a href="#" class="list-group-item list-group-item-action disabled">Venue:</a>
+          <a href="#" class="list-group-item list-group-item-action disabled">Date:</a>
+          <a href="#" class="list-group-item list-group-item-action disabled">City:</a>
+          <a href="#" class="list-group-item list-group-item-action disabled">State:</a>
+          <a href="#" class="list-group-item list-group-item-action active">
+            Buy Tickets
+          </a>
+        </div>
+      </div>
+    </div>
+  </div> 
+
+
+  <div class="col-4">
+    <div class="artist-card" style="width: 18rem;">
+      <div>
+
+        <ul class="list-group">
+          <div data-toggle="tooltip" title="Legend
+            MB = MicroBrewery
+            BP = BrewPub
+            RB = Regional Brewery
+            LB = Large Brewery" style="color:black">
+
+            <h2 id="artist-chosen" style="text-align: center">Brewery</h2>
+          </div>
+
+          <img class="artist-card-img-top" src="assets/images/Ballast-Point.png" alt="Card image cap">
+
+          
+
+        </ul>
+      </div>
+    </div>
+  </div> -->
+
+  <!--end of orig code-->
+
+
+
+
+  <div class="row">
+    <div id="recently-searched">Recently Searched</div>
+  </div>
+</body>
+
+</html>

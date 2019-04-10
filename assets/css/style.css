@@ -1,0 +1,184 @@
+.col-12{
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+.headerColor {
+  background-color: #114B5F;
+  color: #E4FDE1;
+}
+
+h1 {
+  font-size: 500%;
+}
+
+.search-bar{
+    text-align: center;
+}
+
+#queryState, #query-city {
+  height: 30px;
+  float:left;
+  background-color: #E4FDE1;
+  color: #114B5F;
+  border: none;
+}
+
+#queryState:hover {
+  background-color: #F45B69;
+  color: #E4FDE1;
+}
+
+.searchBox1 {
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.searchBox2{
+  margin-left: auto;
+  margin-right: auto;
+  width: 650px;
+}
+
+.dateSearchLabel, #sdate, #edate {
+  background-color: #E4FDE1;
+  color: #114B5F;
+  height: 30px;
+  border: none;
+}
+
+.dateSearchLabel {
+  padding-top: 3px;
+  padding-right:50px;
+}
+
+#sdate, #edate {
+  width: 150px;
+}
+
+
+#sdate, .dateSearchLabel, #edate, #event-query {
+  float: left;
+}
+
+#event-query {
+  background-color: #E4FDE1;
+  color: #114B5F;
+  border: none;
+  height: 30px;
+}
+
+#event-query:hover {
+  background-color: #F45B69;
+  color: #E4FDE1;
+
+}
+
+.padded {
+  margin-bottom: 30px;
+}
+
+.artist-card-img-top{
+    length: 250px;
+    width: 250px;
+}
+.list-group{
+    length:250px;
+    width:250px;
+
+}
+
+/* body{
+background-image: linear-gradient(-225deg, #7085B6 0%, #87A7D9 50%, #DEF3F8 100%);
+font-family: 'Lobster', cursive;
+width: 100%;
+} */
+
+.brewResult{
+   display:  inline-block;
+   margin-top:10px;
+
+}
+
+/* .show-poster {
+    float: left;
+    display: block;
+    max-width:300px;
+    max-height:400px;
+    width: auto;
+    height: auto;
+} */
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+#eDay{
+    margin: 10%;
+}
+
+header{
+    background: rgb(70, 0, 0);
+    color: whitesmoke;
+    padding-bottom: 30px;
+
+}
+
+.date-search {
+    margin-top: 20px;
+}
+
+.jumbotron-fluid {
+    padding-top: 30px;
+}
+
+.container-fluid {
+    padding: 0;
+}
+
+.artist-card {
+width: 18rem;
+}
+
+#artist-chosen {
+    text-align: center;
+}
+
+
+
+/* Search Results */
+
+#results {
+  width: 100%;
+  background-color: #474747;
+}
+
+.show-poster {
+    float:left;
+    width: 150px;
+    height: 100px;
+    margin-right: 10px;
+  }
+
+  .event-button{
+      background-color: #E4FDE1;
+      color: black;
+      display: inline-block;
+      margin-top: 5px;
+      width: 100%;
+      padding: 10px;
+  }
+
+  .event-button:hover{
+    background-color: #F45B69;
+    cursor: pointer;
+  }
+
+  /*Details View*/
+  #detailsView {
+    display: none;
+  }
